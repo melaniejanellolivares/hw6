@@ -95,5 +95,85 @@ bool boggleHelper(const std::set<std::string>& dict, const std::set<std::string>
 								   std::string word, std::set<std::string>& result, unsigned int r, unsigned int c, int dr, int dc)
 {
 //add your solution here!
+	// 
+	
+	//for base case: check if the word is in bounds (cehck if you read end of row or column) 
+	//then check if valid word
+// std::cout << word << std::endl;
+
+	if(r == board.size() || c == board.size()){
+
+		if(dict.find(word) != dict.end()){ //check if the last is a word, then insert
+			result.insert(word);
+			return true;
+		}
+		else{
+			return false; //not a word and at the end
+
+		}
+
+	}
+
+	// std::set<std::string>::iterator itp = prefix.find(word);
+	// std::set<std::string>::iterator it = dict.find(word);
+	std::string ogword = word;
+
+	// if(itp == itp.end && it != it.end){ //check if it is a real word
+	// 	result.insert(word);
+	// }
+	if( prefix.find(word) == prefix.end()){ 	//not prefix
+
+		if(dict.find(word) != dict.end()){ //word
+			result.insert(word);
+			return true;
+
+		}
+		return false; 
+
+	}
+	word += board[r][c];
+
+	bool res = boggleHelper(dict, prefix, board, word, result, r + dr, c + dc, dr, dc);
+
+	if(res == false){
+		if(dict.find(word) != dict.end()){ //word
+			result.insert(word);
+			return true;
+
+		}
+		return false;
+	}
+	return res; 
+
+	// else{
+	// 	// word = ogword; 
+	// 	// bool res = boggleHelper(dict, prefix, board, word, result, r + dr, c + dc, dr, dc);
+	// }
+	
+	
+	// if(it != dict.end()){ //is a word
+	// 	result.insert(word);
+	// 	return true;
+	// }
+	// else{
+	// 	return false; 
+	// }
+
+	// return false;
+
+
+
+	//check if it returned false 
+
+	//if true return the word
+
+	//else check if the second lognest word is the longest word if it is insert word and return word other wise return false
+
+
+	
+
+	
+
+
 
 }
